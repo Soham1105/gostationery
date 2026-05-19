@@ -187,9 +187,36 @@
     <div class="nav-actions">
       <button class="nav-cta" onclick="openModal()">Request Demo</button>
     </div>
-    <button class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+    <div class="hamburger-wrap">
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
+
+<!-- MOBILE NAV PANEL -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-link" onclick="toggleMobileSub('mobSolutions')">
+    Solutions <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </button>
+  <div class="mobile-sub" id="mobSolutions">
+    <a href="kiosk.html"><div class="dropdown-icon di-blue">🖥️</div><span>Kiosk — Queue Management</span></a>
+    <a href="vending.html"><div class="dropdown-icon di-orange">🖨️</div><span>Print & Dispense Station</span></a>
+  </div>
+  <button class="mobile-nav-link" onclick="toggleMobileSub('mobIndustries')">
+    Industries <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </button>
+  <div class="mobile-sub" id="mobIndustries">
+    <a href="industries.html#healthcare"><div class="dropdown-icon di-green">🏥</div><span>Healthcare</span></a>
+    <a href="industries.html#banking"><div class="dropdown-icon di-blue">🏦</div><span>Banking & Finance</span></a>
+    <a href="industries.html#retail"><div class="dropdown-icon di-yellow">🛒</div><span>Retail</span></a>
+    <a href="industries.html#govt"><div class="dropdown-icon di-purple">🏛️</div><span>Government</span></a>
+    <a href="industries.html#corporate"><div class="dropdown-icon di-red">🏢</div><span>Corporate</span></a>
+    <a href="industries.html#education"><div class="dropdown-icon di-green">🎓</div><span>Education</span></a>
+  </div>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()">Contact</a>
+  <button class="mobile-nav-cta" onclick="closeMobileNav(); openModal()">Request Free Demo</button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -591,8 +618,19 @@
   }, 3500);
 
   function toggleMobileNav() {
-    document.querySelector('.nav-menu').style.display =
-      document.querySelector('.nav-menu').style.display === 'flex' ? 'none' : 'flex';
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const open = nav.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function toggleMobileSub(id) {
+    document.getElementById(id).classList.toggle('open');
   }
 </script>
 </body>
