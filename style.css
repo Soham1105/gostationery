@@ -369,12 +369,15 @@ footer {
 .modal-success h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
 .modal-success p { color: var(--muted); font-size: 0.9rem; }
 
-/* ── ANIMATIONS ── */
+/* ── ANIMATIONS (progressive enhancement — JS adds .will-anim before hiding) ── */
 .fade-up {
-  opacity: 0; transform: translateY(30px);
   transition: opacity .65s ease, transform .65s ease;
 }
-.fade-up.visible { opacity: 1; transform: none; }
+/* JS adds this class BEFORE setting opacity:0, so no-JS = always visible */
+.fade-up.will-anim {
+  opacity: 0; transform: translateY(30px);
+}
+.fade-up.visible { opacity: 1 !important; transform: none !important; }
 .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
 .d4{transition-delay:.32s} .d5{transition-delay:.40s} .d6{transition-delay:.48s}
 
@@ -497,10 +500,10 @@ footer {
 
 /* ── RESPONSIVE ── */
 
-/* Tablet: 768px – 960px */
-@media(max-width:960px) {
-  .nav-menu, .nav-actions { display: none; }
-  .hamburger-wrap { display: flex; }
+/* Tablet / mobile nav — catches phones, tablets, and iPads in landscape */
+@media(max-width:1024px) {
+  .nav-menu, .nav-actions { display: none !important; }
+  .hamburger-wrap { display: flex !important; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .stats-grid { grid-template-columns: repeat(2,1fr); }
   .trust-grid { grid-template-columns: repeat(2,1fr); }

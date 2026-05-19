@@ -5,12 +5,19 @@ const navEl = document.getElementById('mainNav');
 if (navEl) window.addEventListener('scroll', () =>
   navEl.classList.toggle('scrolled', scrollY > 20), { passive: true });
 
-/* ── SCROLL ANIMATIONS ── */
+/* ── SCROLL ANIMATIONS (progressive enhancement) ── */
 const io = new IntersectionObserver(entries =>
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0.1 }
+  { threshold: 0 }   /* fire on any intersection */
 );
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+document.querySelectorAll('.fade-up').forEach(el => {
+  el.classList.add('will-anim');  /* only hidden when JS is running */
+  io.observe(el);
+});
+/* Hard fallback: make everything visible after 800ms regardless */
+setTimeout(() => {
+  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+}, 800);
 
 /* ── ANIMATED COUNTERS ── */
 function animCount(el, target, dur = 1800) {
