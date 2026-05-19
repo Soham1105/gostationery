@@ -542,6 +542,53 @@ footer {
   h2 { font-size: clamp(1.5rem,6vw,2rem); }
 }
 
+/* ── RELIABILITY METRICS BAR ── */
+.rel-metrics {
+  display: flex; align-items: center; gap: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2rem 2.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  margin-bottom: 0; overflow: hidden;
+}
+.rel-metric { flex: 1; text-align: center; padding: 0 1rem; }
+.rel-metric-val {
+  font-size: 2.2rem; font-weight: 900; color: var(--primary);
+  line-height: 1; margin-bottom: 0.6rem; letter-spacing: -0.03em;
+}
+.rel-metric-val span {
+  font-size: 1rem; font-weight: 700; color: var(--accent); margin-left: 2px;
+}
+.rel-metric-bar {
+  height: 6px; background: #e2e8f0; border-radius: 99px;
+  overflow: hidden; margin-bottom: 0.6rem;
+}
+.rel-bar-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1.2s cubic-bezier(.4,0,.2,1);
+}
+/* animate bar when section enters viewport */
+.rel-metrics.visible .rel-bar-fill { transform: scaleX(1); }
+.rel-metric-label {
+  font-size: 0.72rem; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.rel-divider {
+  width: 1px; align-self: stretch;
+  background: var(--border); flex-shrink: 0;
+  margin: 0.5rem 0;
+}
+@media(max-width:768px) {
+  .rel-metrics { flex-direction: column; gap: 1.5rem; padding: 1.75rem 1.5rem; }
+  .rel-divider { width: 100%; height: 1px; align-self: auto; margin: 0; }
+  .rel-metric { width: 100%; }
+}
+@media(max-width:640px) {
+  .rel-metrics { padding: 1.5rem 1.25rem; border-radius: 16px; }
+  .rel-metric-val { font-size: 1.8rem; }
+}
+
 /* ── PAGE-SPECIFIC HERO UTIL ── */
 .page-hero {
   padding: calc(var(--nav-h) + 4rem) 2rem 5rem;
