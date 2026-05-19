@@ -78,3 +78,28 @@ if (demoForm) demoForm.addEventListener('submit', e => {
 /* Expose globally */
 window.openModal  = openModal;
 window.closeModal = closeModal;
+
+/* ── MOBILE NAV ── */
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  if (!nav) return;
+  const open = nav.classList.toggle('open');
+  if (btn) btn.classList.toggle('active', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  if (!nav) return;
+  nav.classList.remove('open');
+  if (btn) btn.classList.remove('active');
+  document.body.style.overflow = '';
+}
+function toggleMobileSub(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+window.toggleMobileNav = toggleMobileNav;
+window.closeMobileNav  = closeMobileNav;
+window.toggleMobileSub = toggleMobileSub;

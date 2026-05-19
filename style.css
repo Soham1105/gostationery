@@ -543,3 +543,36 @@ footer {
   .feature-row { grid-template-columns:1fr; gap:2rem; }
   .feature-row.reverse .feature-visual { order:-1; }
 }
+
+/* ── RESPONSIVE 2-COL UTILITY ── */
+.resp-grid-2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}
+@media(max-width:768px) {
+  .resp-grid-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
+
+/* ── EXTRA MOBILE FIXES ── */
+@media(max-width:640px) {
+  /* Hide the decorative horizontal step-connector line */
+  .step-conn { display: none !important; }
+
+  /* Hero buttons: stack on very small screens */
+  .hero-btns { gap: 0.75rem; }
+
+  /* Floating chips on product hero: pull them in so they don't overflow */
+  .fc-1 { right: 8px !important; top: 8px !important; }
+  .fc-2 { left: 8px !important; bottom: 8px !important; }
+  .hf-1 { right: 8px !important; top: 8px !important; }
+  .hf-2 { left: 8px !important; bottom: 8px !important; }
+
+  /* Product hero: remove the double nav-height top padding */
+  .prod-hero { padding-top: 3rem !important; }
+
+  /* Specs table wrapper */
+  .specs-wrap { grid-template-columns: 1fr !important; }
+
+  /* About inline grids */
+  .about-story-grid,
+  .about-careers-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
