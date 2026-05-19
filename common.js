@@ -80,26 +80,56 @@ window.openModal  = openModal;
 window.closeModal = closeModal;
 
 /* ── MOBILE NAV ── */
+
+/* Create backdrop element once DOM is ready */
+let _backdrop = null;
+function _getBackdrop() {
+  if (!_backdrop) {
+    _backdrop = document.createElement('div');
+    _backdrop.className = 'nav-backdrop';
+    _backdrop.addEventListener('click', closeMobileNav);
+    document.body.appendChild(_backdrop);
+  }
+  return _backdrop;
+}
+
 function toggleMobileNav() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburger');
   if (!nav) return;
   const open = nav.classList.toggle('open');
   if (btn) btn.classList.toggle('active', open);
+  _getBackdrop().classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
 }
+
 function closeMobileNav() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburger');
   if (!nav) return;
   nav.classList.remove('open');
   if (btn) btn.classList.remove('active');
+  _getBackdrop().classList.remove('open');
   document.body.style.overflow = '';
+  /* Also close all open sub-menus */
+  document.querySelectorAll('.mobile-sub.open').forEach(s => s.classList.remove('open'));
+  document.querySelectorAll('.mobile-nav-link.sub-open').forEach(b => b.classList.remove('sub-open'));
 }
+
 function toggleMobileSub(id) {
-  const el = document.getElementById(id);
-  if (el) el.classList.toggle('open');
+  const sub = document.getElementById(id);
+  if (!sub) return;
+  const open = sub.classList.toggle('open');
+  /* Rotate the chevron on the preceding button sibling */
+  const btn = sub.previousElementSibling;
+  if (btn) btn.classList.toggle('sub-open', open);
 }
+
+/* Close mobile nav on resize to desktop */
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960) closeMobileNav();
+});
+
 window.toggleMobileNav = toggleMobileNav;
 window.closeMobileNav  = closeMobileNav;
 window.toggleMobileSub = toggleMobileSub;
