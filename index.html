@@ -147,7 +147,16 @@
     .cta-banner p  { color:rgba(255,255,255,.8);font-size:1.05rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.7;position:relative;z-index:1; }
     .cta-btns { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1; }
 
-    @media(max-width:900px){
+    /* Hero animates via CSS — no JS dependency */
+    .hero-instant {
+      animation: heroIn .75s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media(max-width:1024px){
       .hero-inner { grid-template-columns:1fr;text-align:center; }
       .hero-btns { justify-content:center; }
       .hero-visual { display:none; }
@@ -225,7 +234,7 @@
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
   <div class="hero-inner">
-    <div class="hero-text fade-up">
+    <div class="hero-text hero-instant">
       <div class="hero-badge"><span class="badge-dot"></span>Software-First Solutions · Made in India</div>
       <h1>Your time is <span class="text-gradient">priceless.</span></h1>
       <p>Intelligent software-powered products that eliminate queues and automate stationery — turning everyday frustrations into seamless experiences.</p>

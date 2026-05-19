@@ -154,7 +154,7 @@ window.closeModal = closeModal;
 
   /* ── close on resize to desktop ── */
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 960) closeNav();
+    if (window.innerWidth > 1024) closeNav();
   }, { passive: true });
 
   /* ── close on Escape ── */
